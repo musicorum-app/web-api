@@ -107,6 +107,7 @@ module.exports = (musicorum) => {
   })
 
   router.patch('/:id', auth, async (req, res) => {
+    // TODO: FIX THAT SHIT
     try {
       const id = req.params.id
       const { schedules } = req.user
@@ -126,7 +127,7 @@ module.exports = (musicorum) => {
         return
       }
 
-      console.log(schedules)
+      console.log(typeof schedules.map(s => s._id)[0])
       
       const schedule = schedules.find(s => s._id === id)
       const patch = req.body
