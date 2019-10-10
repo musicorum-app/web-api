@@ -1,15 +1,18 @@
 const mongoose = require('mongoose')
 
-const Scheduler = new mongoose.Schema({
-  user: String,
+const Schedule = new mongoose.Schema({
+  name: String,
   schedule: {
     type: String,
     enum: ['MONTHY', 'WEEKLY']
   },
   time: Number,
   timezone: String,
-  theme: String,
+  theme: {
+    type: String,
+    enum: ['grid', 'tops']
+  },
   themeOptions: Object
 })
 
-module.exports = mongoose.model('Scheduler', Scheduler)
+module.exports = Schedule

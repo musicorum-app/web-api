@@ -4,6 +4,7 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const authRouter = require('./routers/auth.js')
+const schedulesRouter = require('./routers/schedules.js')
 
 module.exports = class MusicorumAPI {
   init () {
@@ -14,6 +15,7 @@ module.exports = class MusicorumAPI {
     app.use(morgan((t, q, s) => this.morganPattern(t, q, s)))
     // app.use(authMiddleware)
     app.use('/auth', authRouter(this))
+    app.use('/schedules', schedulesRouter(this))
     app.listen(this.port, () =>
       console.log(chalk.bgGreen(' SUCCESS ') + ' Web server started on port ' + chalk.blue(this.port)))
   }

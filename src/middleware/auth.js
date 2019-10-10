@@ -12,6 +12,6 @@ module.exports = async (req, res, next) => {
     req.user = await User.findOne({ _id: decoded.id })
     next()
   } catch (ex) {
-    res.status(400).json({ message: 'Invalid token.' })
+    res.status(400).json({ message: 'Invalid authentication token.' })
   }
 }

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
+const Schedule = require('./Schedule.js')
 
 const TwitterAccount = new mongoose.Schema({
   id: String,
@@ -13,7 +14,8 @@ const LastfmAccount = new mongoose.Schema({
 
 const User = new mongoose.Schema({
   twitter: TwitterAccount,
-  lastfm: LastfmAccount
+  lastfm: LastfmAccount,
+  schedules: [Schedule]
 })
 
 User.methods.generateAuthToken = function () {
@@ -21,5 +23,6 @@ User.methods.generateAuthToken = function () {
 }
 
 module.exports = mongoose.model('User', User)
+module.exports.Schedule = mongoose.model('Schedule', Schedule)
 module.exports.TwitterAccount = mongoose.model('TwitterAccount', TwitterAccount)
 module.exports.LastfmAccount = mongoose.model('LastfmAccount', LastfmAccount)

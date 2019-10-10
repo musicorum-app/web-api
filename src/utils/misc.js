@@ -7,5 +7,17 @@ module.exports = {
       result += characters.charAt(Math.floor(Math.random() * charactersLength))
     }
     return result
+  },
+
+  renameKeyInObject (obj, key, name) {
+    if (key === name) {
+      return obj
+    }
+    // eslint-disable-next-line no-prototype-builtins
+    if (obj.hasOwnProperty(key)) {
+      obj[name] = obj[key]
+      delete obj[key]
+    }
+    return obj
   }
 }
