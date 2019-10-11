@@ -5,18 +5,16 @@
 GET     /auth/me
 POST    /auth/twitter
 GET     /auth/twitter/callback
+POST    /auth/lastfm/callback
+DELETE  /auth/schedulers/:id
+GET     /auth/schedulers
+PUT     /auth/schedulers
 </pre>
 
 ### TODO Routers:
 
 <pre>
-GET     /auth/lastfm
-POST    /auth/lastfm/callback
-GET     /auth/schedulers
-PUT     /auth/schedulers
-GET     /auth/schedulers/:id
 PATCH   /auth/schedulers/:id
-DELETE  /auth/schedulers/:id
 GET     /auth/schedulers/:id/runs
 DELETE  /auth/schedulers/:id/runs/:id
 </pre>
