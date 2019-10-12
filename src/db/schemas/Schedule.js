@@ -8,6 +8,7 @@ const Schedule = new mongoose.Schema({
   },
   time: Number,
   timezone: String,
+  text: String,
   theme: {
     type: String,
     enum: ['grid', 'tops']

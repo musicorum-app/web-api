@@ -1,7 +1,5 @@
 const chalk = require('chalk')
-const Joi = require('@hapi/joi')
 const auth = require('../middleware/auth.js')
-const MiscUtils = require('../utils/misc.js')
 const User = require('../db/schemas/User.js')
 const ScheduleJoi = require('../joi/schedule.js')
 const express = require('express')
@@ -128,10 +126,10 @@ module.exports = (musicorum) => {
       }
 
       console.log(typeof schedules.map(s => s._id)[0])
-      
+
       const schedule = schedules.find(s => s._id === id)
       const patch = req.body
-      
+
       console.log(schedule)
       console.log(patch)
 

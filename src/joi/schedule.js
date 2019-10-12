@@ -16,6 +16,9 @@ module.exports = Joi.object({
     .max(1440)
     .required(),
 
+  text: Joi.string()
+    .max(200),
+
   timezone: Joi.string()
     .valid(...Object.keys(timezones))
     .required(),
@@ -54,6 +57,9 @@ module.exports.notRequired = Joi.object({
   time: Joi.number()
     .min(0)
     .max(1440),
+
+  text: Joi.string()
+    .max(200),
 
   timezone: Joi.string()
     .valid(...Object.keys(timezones)),
