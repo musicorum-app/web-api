@@ -173,5 +173,9 @@ module.exports = (musicorum) => {
     }
   })
 
+  router.get('/:id/runs', auth, async (req, res) => {
+    // TODO
+  })
+
   return router
 }

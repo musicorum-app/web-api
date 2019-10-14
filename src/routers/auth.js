@@ -155,7 +155,6 @@ module.exports = (musicorum) => {
 
       req.user.lastfm = lfmInfo
       req.user.save()
-
     } catch (err) {
       res
         .status(500)
