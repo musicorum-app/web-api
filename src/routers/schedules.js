@@ -1,6 +1,8 @@
 const chalk = require('chalk')
+const fetch = require('node-fetch')
 const auth = require('../middleware/auth.js')
 const User = require('../db/schemas/User.js')
+const Run = require('../db/schemas/Run.js')
 const ScheduleJoi = require('../joi/schedule.js')
 const messages = require('../responses/messages.js')
 const express = require('express')
@@ -82,6 +84,8 @@ module.exports = (musicorum) => {
       req.user.save()
 
       res.json({ success: true })
+      
+      fetch(`${process.env.SCHEDULER_URL}/tasks/${id}`)
     } catch (err) {
       res.status(500).json(messages.INTERNAL_ERROR)
       console.error(chalk.bgRed(' ERROR ') + ' ' + err)
@@ -106,13 +110,15 @@ module.exports = (musicorum) => {
         return
       }
 
-      console.log(typeof schedules.map(s => s._id)[0])
+      console.log(schedules)
 
-      const schedule = schedules.find(s => s._id === id)
+      console.log(id)
+      const schedule = schedules.find(s => s._id.toString() === id)
       const patch = req.body
 
-      console.log(schedule)
-      console.log(patch)
+      if (patch._id) {
+        delete patch._id
+      }
 
       if (!patch) {
         res.status(404).json(messages.INVALID_PATCH)
@@ -129,12 +135,17 @@ module.exports = (musicorum) => {
       }
 
       ScheduleJoi.notRequired.validateAsync(patch)
-        .then(a => {
+        .then(() => {
+          console.log(schedule, patch)
           const newSchedule = Object.assign(schedule, patch)
           req.user.save()
           res.json({ success: true, schedule: newSchedule })
         })
-        .catch(() => res.status(500).json(messages.INTERNAL_ERROR))
+        .catch(err => {
+          res.status(500).json(messages.INTERNAL_ERROR)
+          console.error(chalk.bgRed(' ERROR ') + ' ' + err)
+          console.error(err)
+        })
     } catch (err) {
       res.status(500).json(messages.INTERNAL_ERROR)
       console.error(chalk.bgRed(' ERROR ') + ' ' + err)
@@ -143,7 +154,42 @@ module.exports = (musicorum) => {
   })
 
   router.get('/:id/runs', auth, async (req, res) => {
-    // TODO
+    try {
+      const id = req.params.id
+      const { schedules } = req.user
+
+      if (!id) {
+        res.status(404).json(messages.SCHEDULE_NOT_FOUND)
+        return
+      }
+      const scheIds = schedules.map(s => s._id)
+
+      if (!scheIds.includes(id)) {
+        res.status(404).json(messages.SCHEDULE_NOT_FOUND)
+        return
+      }
+
+      let runs = await Run.find({ schedule: id })
+
+      console.log(runs)
+
+      runs = runs.map(run => {
+        console.log(new Date(run._doc.startTime).getTime())
+        const s = Object.assign({ id: run._doc._id }, run._doc)
+        delete s._id
+        delete s.__v
+        delete s.schedule
+        s.startTime = new Date(run._doc.startTime).getTime()
+        s.endTime = new Date(run._doc.startTime).getTime()
+        return s
+      })
+
+      res.json({ runs })
+    } catch (err) {
+      res.status(500).json(messages.INTERNAL_ERROR)
+      console.error(chalk.bgRed(' ERROR ') + ' ' + err)
+      console.error(err)
+    }
   })
 
   return router
