@@ -84,7 +84,7 @@ module.exports = (musicorum) => {
       req.user.save()
 
       res.json({ success: true })
-      
+
       fetch(`${process.env.SCHEDULER_URL}/tasks/${id}`)
     } catch (err) {
       res.status(500).json(messages.INTERNAL_ERROR)
@@ -110,9 +110,6 @@ module.exports = (musicorum) => {
         return
       }
 
-      console.log(schedules)
-
-      console.log(id)
       const schedule = schedules.find(s => s._id.toString() === id)
       const patch = req.body
 
@@ -136,7 +133,6 @@ module.exports = (musicorum) => {
 
       ScheduleJoi.notRequired.validateAsync(patch)
         .then(() => {
-          console.log(schedule, patch)
           const newSchedule = Object.assign(schedule, patch)
           req.user.save()
           res.json({ success: true, schedule: newSchedule })
@@ -171,10 +167,7 @@ module.exports = (musicorum) => {
 
       let runs = await Run.find({ schedule: id })
 
-      console.log(runs)
-
       runs = runs.map(run => {
-        console.log(new Date(run._doc.startTime).getTime())
         const s = Object.assign({ id: run._doc._id }, run._doc)
         delete s._id
         delete s.__v
