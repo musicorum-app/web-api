@@ -2,6 +2,7 @@ const chalk = require('chalk')
 const auth = require('../middleware/auth.js')
 const User = require('../db/schemas/User.js')
 const ScheduleJoi = require('../joi/schedule.js')
+const messages = require('../responses/messages.js')
 const express = require('express')
 const router = express.Router()
 
@@ -20,9 +21,7 @@ module.exports = (musicorum) => {
       })
       res.json(list)
     } catch (err) {
-      res
-        .status(500)
-        .json({ message: err.message })
+      res.status(500).json(messages.INTERNAL_ERROR)
       console.error(chalk.bgRed(' ERROR ') + ' ' + err)
       console.error(err)
     }
@@ -33,9 +32,7 @@ module.exports = (musicorum) => {
       const { schedules } = req.user
 
       if (schedules && schedules.length > 2) {
-        res
-          .status(400)
-          .json({ message: 'Limit reached' })
+        res.status(400).json(messages.SCHEDULES_LIMIT_REACHED)
         return
       }
 
@@ -58,15 +55,9 @@ module.exports = (musicorum) => {
             }
           )
         })
-        .catch(err => {
-          res
-            .status(400)
-            .json({ message: err.message })
-        })
+        .catch(() => res.status(400).json(messages.INTERNAL_ERROR))
     } catch (err) {
-      res
-        .status(500)
-        .json({ message: err.message })
+      res.status(500).json(messages.INTERNAL_ERROR)
       console.error(chalk.bgRed(' ERROR ') + ' ' + err)
       console.error(err)
     }
@@ -77,17 +68,13 @@ module.exports = (musicorum) => {
       const id = req.params.id
       const { schedules } = req.user
       if (!id) {
-        res
-          .status(404)
-          .json({ message: 'Invalid id.' })
+        res.status(404).json(messages.SCHEDULE_NOT_FOUND)
         return
       }
       const scheIds = schedules.map(s => s._id)
 
       if (!scheIds.includes(id)) {
-        res
-          .status(404)
-          .json({ message: 'Schedule not found.' })
+        res.status(404).json(messages.SCHEDULE_NOT_FOUND)
         return
       }
 
@@ -96,9 +83,7 @@ module.exports = (musicorum) => {
 
       res.json({ success: true })
     } catch (err) {
-      res
-        .status(500)
-        .json({ message: err.message })
+      res.status(500).json(messages.INTERNAL_ERROR)
       console.error(chalk.bgRed(' ERROR ') + ' ' + err)
       console.error(err)
     }
@@ -111,17 +96,13 @@ module.exports = (musicorum) => {
       const { schedules } = req.user
 
       if (!id) {
-        res
-          .status(404)
-          .json({ message: 'Invalid id.' })
+        res.status(404).json(messages.SCHEDULE_NOT_FOUND)
         return
       }
       const scheIds = schedules.map(s => s._id)
 
       if (!scheIds.includes(id)) {
-        res
-          .status(404)
-          .json({ message: 'Schedule not found.' })
+        res.status(404).json(messages.SCHEDULE_NOT_FOUND)
         return
       }
 
@@ -134,22 +115,16 @@ module.exports = (musicorum) => {
       console.log(patch)
 
       if (!patch) {
-        res
-          .status(400)
-          .json({ message: 'No patch.' })
+        res.status(404).json(messages.INVALID_PATCH)
         return
       }
       if (!(patch instanceof Object)) {
-        res
-          .status(400)
-          .json({ message: 'Invalid patch.' })
+        res.status(404).json(messages.INVALID_PATCH)
         return
       }
 
       if (Object.keys(patch).length === 0) {
-        res
-          .status(400)
-          .json({ message: 'Invalid patch.' })
+        res.status(404).json(messages.INVALID_PATCH)
         return
       }
 
@@ -159,15 +134,9 @@ module.exports = (musicorum) => {
           req.user.save()
           res.json({ success: true, schedule: newSchedule })
         })
-        .catch(err => {
-          res
-            .status(400)
-            .json({ message: err.message })
-        })
+        .catch(() => res.status(500).json(messages.INTERNAL_ERROR))
     } catch (err) {
-      res
-        .status(500)
-        .json({ message: err.message })
+      res.status(500).json(messages.INTERNAL_ERROR)
       console.error(chalk.bgRed(' ERROR ') + ' ' + err)
       console.error(err)
     }

@@ -4,6 +4,7 @@ const chalk = require('chalk')
 const Twit = require('twit')
 const auth = require('../middleware/auth.js')
 const User = require('../db/schemas/User.js')
+const messages = require('../responses/messages.js')
 const express = require('express')
 const router = express.Router()
 const { MiscUtils, crypto } = require('../utils')
@@ -29,7 +30,6 @@ module.exports = (musicorum) => {
         access_token_secret: crypto.decryptToken(user.twitter.accessSecret, process.env.TWITTER_CRYPTO)
       })
       const { data } = await T.get('account/verify_credentials', { skip_status: true })
-      console.log(user)
       const twitter = {
         id: data.id_str,
         name: data.name,
@@ -54,9 +54,7 @@ module.exports = (musicorum) => {
         lastfm
       })
     } catch (err) {
-      res
-        .status(500)
-        .json({ message: 'Internal server error.' })
+      res.status(500).json(messages.INTERNAL_ERROR)
       console.error(chalk.bgRed(' ERROR ') + ' ' + err)
       console.error(err)
     }
@@ -65,9 +63,7 @@ module.exports = (musicorum) => {
   router.get('/twitter', async (req, res) => {
     TW.login((err, tokenSecret, url) => {
       if (err) {
-        res
-          .status(500)
-          .json({ message: 'Internal server error.' })
+        res.status(500).json(messages.INTERNAL_ERROR)
         console.error(chalk.bgRed(' ERROR ') + ' ' + err)
         console.error(err)
         return
@@ -83,23 +79,17 @@ module.exports = (musicorum) => {
   router.post('/twitter/callback', async (req, res) => {
     const { oauthToken, oauthVerifier, tokenId } = req.body
     if (!oauthToken || !oauthVerifier || !tokenId) {
-      res
-        .status(400)
-        .json({ message: 'Missing parameters.' })
+      res.status(400).json(messages.MISSING_PARAMETERS)
       return
     }
     const secret = twitterSecretTokens.get(tokenId)
     if (!secret) {
-      res
-        .status(400)
-        .json({ message: 'Invalid tokenId' })
+      res.status(400).json(messages.INVALID_TOKENID)
       return
     }
     TW.callback({ oauth_token: oauthToken, oauth_verifier: oauthVerifier }, secret, async (err, user) => {
       if (err) {
-        res
-          .status(500)
-          .json({ message: 'Internal server error.' })
+        res.status(500).json(messages.INTERNAL_ERROR)
         console.error(chalk.bgRed(' ERROR ') + ' ' + err)
         console.error(err)
         return
@@ -107,13 +97,10 @@ module.exports = (musicorum) => {
 
       const userDoc = await User.findOne({ 'twitter.id': user.userId })
 
-      console.log(userDoc)
       if (userDoc) {
-        res
-          .status(200)
-          .json({
-            token: userDoc.generateAuthToken()
-          })
+        res.json({
+          token: userDoc.generateAuthToken()
+        })
       } else {
         const twitterAcc = new User.TwitterAccount({
           accessToken: crypto.encryptToken(user.userToken, process.env.TWITTER_CRYPTO),
@@ -124,11 +111,9 @@ module.exports = (musicorum) => {
           twitter: twitterAcc
         })
         newUser.save()
-        res
-          .status(200)
-          .json({
-            token: newUser.generateAuthToken()
-          })
+        res.json({
+          token: newUser.generateAuthToken()
+        })
       }
 
       twitterSecretTokens.delete(tokenId)
@@ -139,9 +124,7 @@ module.exports = (musicorum) => {
     try {
       const { token } = req.body
       if (!token) {
-        res
-          .status(400)
-          .json({ message: 'Missing token.' })
+        res.status(400).json(messages.INVALID_TOKEN)
         return
       }
       const { session } = await LastFM.authGetSession({ token })
@@ -156,9 +139,7 @@ module.exports = (musicorum) => {
       req.user.lastfm = lfmInfo
       req.user.save()
     } catch (err) {
-      res
-        .status(500)
-        .json({ message: err.message })
+      res.status(500).json(messages.INTERNAL_ERROR)
       console.error(chalk.bgRed(' ERROR ') + ' ' + err)
       console.error(err)
     }
