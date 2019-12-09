@@ -4,6 +4,7 @@
   "description": "The musicurum website API",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "start-dev": "nodemon --exec node -r dotenv/config index.js"
   },
   "repository": {
