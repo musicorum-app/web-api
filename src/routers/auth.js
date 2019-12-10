@@ -14,7 +14,7 @@ const LastFM = new LFM(process.env.LASTFM_KEY, process.env.LASTFM_SECRET)
 const TW = new LoginWithTwitter({
   consumerKey: process.env.TWITTER_API_KEY,
   consumerSecret: process.env.TWITTER_API_SECRET,
-  callbackUrl: process.env.API_URL + 'auth/twitter/callback'
+  callbackUrl: process.env.TWITTER_CALLBACK_URL
 })
 
 const twitterSecretTokens = new Map()
