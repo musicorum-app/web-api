@@ -1,10 +1,22 @@
 const chalk = require('chalk')
 const morgan = require('morgan')
+const cors = require('cors')
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const authRouter = require('./routers/auth.js')
 const schedulesRouter = require('./routers/schedules.js')
+
+const whitelist = process.env.CORS_WHITELIST.split(';')
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
 
 module.exports = class MusicorumAPI {
   init () {
@@ -12,6 +24,7 @@ module.exports = class MusicorumAPI {
     this.port = process.env.PORT
 
     app.use(express.json())
+    app.use(cors(corsOptions))
     app.use(morgan((t, q, s) => this.morganPattern(t, q, s)))
     // app.use(authMiddleware)
     app.use('/auth', authRouter(this))
