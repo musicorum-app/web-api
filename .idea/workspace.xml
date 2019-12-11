@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="12a0dede-7d96-4cba-aea6-f63d2cf6603f" name="Default Changelist" comment="">
+    <list default="true" id="12a0dede-7d96-4cba-aea6-f63d2cf6603f" name="Default Changelist" comment="Things">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MusicorumAPI.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/MusicorumAPI.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routers/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routers/auth.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -12,6 +15,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="metehus &lt;methidezeeni@gmail.com&gt;" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1UlWi13JTd5m6xyeCZsRr3LEysi" />
@@ -55,7 +63,8 @@
       <workItem from="1575931786788" duration="992000" />
       <workItem from="1575946948884" duration="969000" />
       <workItem from="1575949246672" duration="1467000" />
-      <workItem from="1576016811855" duration="816000" />
+      <workItem from="1576016811855" duration="1226000" />
+      <workItem from="1576106964914" duration="1669000" />
     </task>
     <servers />
   </component>
@@ -74,5 +83,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Things" />
+    <option name="LAST_COMMIT_MESSAGE" value="Things" />
   </component>
 </project>

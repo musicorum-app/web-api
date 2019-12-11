@@ -23,36 +23,44 @@ module.exports = (musicorum) => {
   router.get('/me', auth, async (req, res) => {
     try {
       const { user } = req
-      const T = new Twit({
-        consumer_key: process.env.TWITTER_API_KEY,
-        consumer_secret: process.env.TWITTER_API_SECRET,
-        access_token: crypto.decryptToken(user.twitter.accessToken, process.env.TWITTER_CRYPTO),
-        access_token_secret: crypto.decryptToken(user.twitter.accessSecret, process.env.TWITTER_CRYPTO)
-      })
-      const { data } = await T.get('account/verify_credentials', { skip_status: true })
-      const twitter = {
-        id: data.id_str,
-        name: data.name,
-        user: data.screen_name,
-        profilePicture: data.profile_image_url_https.replace('_normal', '')
-      }
-      let lastfm = null
-      if (user.lastfm && user.lastfm.sessionKey) {
-        const sk = crypto.decryptToken(user.lastfm.sessionKey, process.env.LASTFM_CRYPTO)
-        const lfm = new LFM(process.env.LASTFM_KEY, process.env.LASTFM_SECRET, sk)
-        const userInfo = await lfm.userGetInfo()
-        const { image } = userInfo.user
-        lastfm = {
-          user: userInfo.user.name,
-          name: userInfo.user.realname,
-          profilePicture: image[image.length - 1]['#text']
+      const { full } = req.query
+      console.log(full)
+      if (full) {
+        const T = new Twit({
+          consumer_key: process.env.TWITTER_API_KEY,
+          consumer_secret: process.env.TWITTER_API_SECRET,
+          access_token: crypto.decryptToken(user.twitter.accessToken, process.env.TWITTER_CRYPTO),
+          access_token_secret: crypto.decryptToken(user.twitter.accessSecret, process.env.TWITTER_CRYPTO)
+        })
+        const { data } = await T.get('account/verify_credentials', { skip_status: true })
+        const twitter = {
+          id: data.id_str,
+          name: data.name,
+          user: data.screen_name,
+          profilePicture: data.profile_image_url_https.replace('_normal', '')
         }
+        let lastfm = null
+        if (user.lastfm && user.lastfm.sessionKey) {
+          const sk = crypto.decryptToken(user.lastfm.sessionKey, process.env.LASTFM_CRYPTO)
+          const lfm = new LFM(process.env.LASTFM_KEY, process.env.LASTFM_SECRET, sk)
+          const userInfo = await lfm.userGetInfo()
+          const { image } = userInfo.user
+          lastfm = {
+            user: userInfo.user.name,
+            name: userInfo.user.realname,
+            profilePicture: image[image.length - 1]['#text']
+          }
+        }
+        res.json({
+          id: user._id,
+          twitter,
+          lastfm
+        })
+      } else {
+        res.json({
+          id: user._id
+        })
       }
-      res.json({
-        id: user._id,
-        twitter,
-        lastfm
-      })
     } catch (err) {
       res.status(500).json(messages.INTERNAL_ERROR)
       console.error(chalk.bgRed(' ERROR ') + ' ' + err)
@@ -99,7 +107,8 @@ module.exports = (musicorum) => {
 
       if (userDoc) {
         res.json({
-          token: userDoc.generateAuthToken()
+          token: userDoc.generateAuthToken(),
+          firstLogin: false
         })
       } else {
         const twitterAcc = new User.TwitterAccount({
@@ -112,7 +121,8 @@ module.exports = (musicorum) => {
         })
         newUser.save()
         res.json({
-          token: newUser.generateAuthToken()
+          token: newUser.generateAuthToken(),
+          firstLogin: true
         })
       }
 

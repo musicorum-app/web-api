@@ -6,17 +6,18 @@ const app = express()
 const mongoose = require('mongoose')
 const authRouter = require('./routers/auth.js')
 const schedulesRouter = require('./routers/schedules.js')
+const moment = require('moment')
 
 const whitelist = process.env.CORS_WHITELIST.split(';')
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     if (whitelist.indexOf(origin) !== -1) {
+//       callback(null, true)
+//     } else {
+//       callback(new Error('Not allowed by CORS'))
+//     }
+//   }
+// }
 
 module.exports = class MusicorumAPI {
   init () {
@@ -43,7 +44,9 @@ module.exports = class MusicorumAPI {
     }
     const color = colors[req.method] || 'white'
 
-    return chalk[color].bold(` ${tokens.status(req, res)} ${tokens.method(req, res)}`) + ` ${tokens.url(req, res)} - ${tokens.res(req, res, 'content-lenght')} ms `
+    const time = chalk.cyan('[' + moment().format('DD/MM/YY HH:mm:ss Z') + ']')
+
+    return time + chalk[color].bold(` ${tokens.status(req, res)} ${tokens.method(req, res)}`) + ` ${tokens.url(req, res)} - ${tokens['response-time'](req, res)} ms `
   }
 
   async connectDatabase () {
