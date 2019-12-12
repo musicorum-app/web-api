@@ -24,7 +24,6 @@ module.exports = (musicorum) => {
     try {
       const { user } = req
       const { full } = req.query
-      console.log(full)
       if (full) {
         const T = new Twit({
           consumer_key: process.env.TWITTER_API_KEY,
@@ -80,54 +79,66 @@ module.exports = (musicorum) => {
       const tokenId = MiscUtils.generateRandomString(16)
       twitterSecretTokens.set(tokenId, tokenSecret)
 
-      res.json({ url, tokenId })
+      res.json({
+        url,
+        tokenId
+      })
     })
   })
 
   router.post('/twitter/callback', async (req, res) => {
-    const { oauthToken, oauthVerifier, tokenId } = req.body
-    if (!oauthToken || !oauthVerifier || !tokenId) {
-      res.status(400).json(messages.MISSING_PARAMETERS)
-      return
-    }
-    const secret = twitterSecretTokens.get(tokenId)
-    if (!secret) {
-      res.status(400).json(messages.INVALID_TOKENID)
-      return
-    }
-    TW.callback({ oauth_token: oauthToken, oauth_verifier: oauthVerifier }, secret, async (err, user) => {
-      if (err) {
-        res.status(500).json(messages.INTERNAL_ERROR)
-        console.error(chalk.bgRed(' ERROR ') + ' ' + err)
-        console.error(err)
+    try {
+      const { oauthToken, oauthVerifier, tokenId } = req.body
+      if (!oauthToken || !oauthVerifier || !tokenId) {
+        res.status(400).json(messages.MISSING_PARAMETERS)
         return
       }
-
-      const userDoc = await User.findOne({ 'twitter.id': user.userId })
-
-      if (userDoc) {
-        res.json({
-          token: userDoc.generateAuthToken(),
-          firstLogin: false
-        })
-      } else {
-        const twitterAcc = new User.TwitterAccount({
-          accessToken: crypto.encryptToken(user.userToken, process.env.TWITTER_CRYPTO),
-          accessSecret: crypto.encryptToken(user.userTokenSecret, process.env.TWITTER_CRYPTO),
-          id: user.userId
-        })
-        const newUser = new User({
-          twitter: twitterAcc
-        })
-        newUser.save()
-        res.json({
-          token: newUser.generateAuthToken(),
-          firstLogin: true
-        })
+      const secret = twitterSecretTokens.get(tokenId)
+      if (!secret) {
+        res.status(400).json(messages.INVALID_TOKENID)
+        return
       }
+      TW.callback({
+        oauth_token: oauthToken,
+        oauth_verifier: oauthVerifier
+      }, secret, async (err, user) => {
+        if (err) {
+          res.status(500).json(messages.INTERNAL_ERROR)
+          console.error(chalk.bgRed(' ERROR ') + ' ' + err)
+          console.error(err)
+          return
+        }
 
-      twitterSecretTokens.delete(tokenId)
-    })
+        const userDoc = await User.findOne({ 'twitter.id': user.userId })
+
+        if (userDoc) {
+          res.json({
+            token: userDoc.generateAuthToken(),
+            firstLogin: false
+          })
+        } else {
+          const twitterAcc = new User.TwitterAccount({
+            accessToken: crypto.encryptToken(user.userToken, process.env.TWITTER_CRYPTO),
+            accessSecret: crypto.encryptToken(user.userTokenSecret, process.env.TWITTER_CRYPTO),
+            id: user.userId
+          })
+          const newUser = new User({
+            twitter: twitterAcc
+          })
+          newUser.save()
+          res.json({
+            token: newUser.generateAuthToken(),
+            firstLogin: true
+          })
+        }
+
+        twitterSecretTokens.delete(tokenId)
+      })
+    } catch (err) {
+      res.status(500).json(messages.INTERNAL_ERROR)
+      console.error(chalk.bgRed(' ERROR ') + ' ' + err)
+      console.error(err)
+    }
   })
 
   router.post('/lastfm/callback', auth, async (req, res) => {
