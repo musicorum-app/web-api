@@ -4,9 +4,10 @@ const Schedule = new mongoose.Schema({
   name: String,
   schedule: {
     type: String,
-    enum: ['MONTHY', 'WEEKLY']
+    enum: ['MONTHLY', 'WEEKLY']
   },
   time: Number,
+  day: Number,
   timezone: String,
   text: String,
   theme: {

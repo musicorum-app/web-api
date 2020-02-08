@@ -8,7 +8,12 @@ module.exports = Joi.object({
     .required(),
 
   schedule: Joi.string()
-    .valid('MONTHY', 'WEEKLY')
+    .valid('MONTHLY', 'WEEKLY')
+    .required(),
+
+  day: Joi.number()
+    .min(0)
+    .max(7)
     .required(),
 
   time: Joi.number()
@@ -17,7 +22,8 @@ module.exports = Joi.object({
     .required(),
 
   text: Joi.string()
-    .max(200),
+    .max(200)
+    .optional(),
 
   timezone: Joi.string()
     .valid(...Object.keys(timezones))
@@ -52,7 +58,11 @@ module.exports.notRequired = Joi.object({
     .max(15),
 
   schedule: Joi.string()
-    .valid('MONTHY', 'WEEKLY'),
+    .valid('MONTHLY', 'WEEKLY'),
+
+  day: Joi.number()
+    .min(0)
+    .max(7),
 
   time: Joi.number()
     .min(0)

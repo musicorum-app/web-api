@@ -19,7 +19,7 @@ const TW = new LoginWithTwitter({
 
 const twitterSecretTokens = new Map()
 
-module.exports = (musicorum) => {
+module.exports = () => {
   router.get('/me', auth, async (req, res) => {
     try {
       const { user } = req
@@ -83,6 +83,12 @@ module.exports = (musicorum) => {
         url,
         tokenId
       })
+    })
+  })
+
+  router.get('/lastfm', async (req, res) => {
+    res.json({
+      url: `http://www.last.fm/api/auth/?api_key=${process.env.LASTFM_KEY}&cb=${process.env.LASTFM_CALLBACK_URL}`
     })
   })
 
@@ -153,11 +159,9 @@ module.exports = (musicorum) => {
 
       res.json({ user: session.name })
 
-      const lfmInfo = new User.LastfmAccount({
+      req.user.lastfm = new User.LastfmAccount({
         sessionKey: crypto.encryptToken(session.key, process.env.LASTFM_CRYPTO)
       })
-
-      req.user.lastfm = lfmInfo
       req.user.save()
     } catch (err) {
       res.status(500).json(messages.INTERNAL_ERROR)

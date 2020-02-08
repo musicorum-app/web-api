@@ -10,7 +10,9 @@ module.exports = async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_TOKEN)
-    req.user = await User.findOne({ _id: decoded.id })
+    const user = await User.findOne({ _id: decoded.id })
+    if (!user) throw new Error('User nor found')
+    req.user = user
     next()
   } catch (ex) {
     res.status(401).json(messages.INVALID_TOKEN)

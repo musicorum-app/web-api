@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="12a0dede-7d96-4cba-aea6-f63d2cf6603f" name="Default Changelist" comment="">
+    <list default="true" id="12a0dede-7d96-4cba-aea6-f63d2cf6603f" name="Default Changelist" comment="schedules list">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/db/schemas/Schedule.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/schemas/Schedule.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/joi/schedule.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/joi/schedule.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/middleware/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/middleware/auth.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routers/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routers/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routers/schedules.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routers/schedules.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -62,7 +66,12 @@
       <workItem from="1575949246672" duration="1467000" />
       <workItem from="1576016811855" duration="1226000" />
       <workItem from="1576106964914" duration="1712000" />
-      <workItem from="1576110976546" duration="138000" />
+      <workItem from="1576110976546" duration="2104000" />
+      <workItem from="1576812481230" duration="644000" />
+      <workItem from="1576882371416" duration="70000" />
+      <workItem from="1576952016224" duration="2376000" />
+      <workItem from="1580776160010" duration="2088000" />
+      <workItem from="1581178744971" duration="11025000" />
     </task>
     <task id="LOCAL-00001" summary="auth">
       <created>1576108646276</created>
@@ -71,7 +80,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576108646276</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="auth">
+      <created>1576111127888</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1576111127888</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -93,6 +109,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Things" />
     <MESSAGE value="auth" />
-    <option name="LAST_COMMIT_MESSAGE" value="auth" />
+    <MESSAGE value="schedules list" />
+    <option name="LAST_COMMIT_MESSAGE" value="schedules list" />
   </component>
 </project>

@@ -8,7 +8,7 @@ const messages = require('../responses/messages.js')
 const express = require('express')
 const router = express.Router()
 
-module.exports = (musicorum) => {
+module.exports = () => {
   router.get('/', auth, async (req, res) => {
     try {
       const { schedules } = req.user
@@ -16,12 +16,17 @@ module.exports = (musicorum) => {
         res.json({ schedules: [] })
         return
       }
-      const list = schedules.map(sch => {
+      const list = schedules.map(async sch => {
         const s = Object.assign({ id: sch._doc._id }, sch._doc)
+        const runsArr = await Run.find({ schedule: s._id })
         delete s._id
-        return s
+        return {
+          ...s,
+          runs: runsArr.length
+        }
       })
-      res.json(list)
+      console.log(list)
+      res.json(await Promise.all(list))
     } catch (err) {
       res.status(500).json(messages.INTERNAL_ERROR)
       console.error(chalk.bgRed(' ERROR ') + ' ' + err)
@@ -29,7 +34,7 @@ module.exports = (musicorum) => {
     }
   })
 
-  router.put('/', auth, async (req, res) => {
+  router.post('/', auth, async (req, res) => {
     try {
       const { schedules } = req.user
 
@@ -46,9 +51,9 @@ module.exports = (musicorum) => {
           User.update(
             { _id: req.user._id },
             { $push: { schedules: sch } },
-            (err, raw) => {
+            (err) => {
               if (err) {
-                throw new Error('Could not create item on database.')
+                res.status(400).json(messages.INTERNAL_ERROR)
               } else {
                 res.json({
                   success: true
@@ -57,7 +62,16 @@ module.exports = (musicorum) => {
             }
           )
         })
-        .catch(() => res.status(400).json(messages.INTERNAL_ERROR))
+        .catch(e => {
+          console.error(e)
+          res.status(400).json({
+            error: {
+              code: 'A#400#000',
+              message: e.details[0].message,
+              error: 'ERROR_VALIDATING'
+            }
+          })
+        })
     } catch (err) {
       res.status(500).json(messages.INTERNAL_ERROR)
       console.error(chalk.bgRed(' ERROR ') + ' ' + err)
@@ -81,11 +95,11 @@ module.exports = (musicorum) => {
       }
 
       schedules.pull({ _id: id })
-      req.user.save()
+      await req.user.save()
 
-      res.json({ success: true })
+      await res.json({ success: true })
 
-      fetch(`${process.env.SCHEDULER_URL}/tasks/${id}`)
+      fetch(`${process.env.SCHEDULER_URL}tasks/${id}`)
     } catch (err) {
       res.status(500).json(messages.INTERNAL_ERROR)
       console.error(chalk.bgRed(' ERROR ') + ' ' + err)
@@ -94,6 +108,7 @@ module.exports = (musicorum) => {
   })
 
   router.patch('/:id', auth, async (req, res) => {
+    res.status(500).json(['WIP'])
     // TODO: FIX THAT SHIT
     try {
       const id = req.params.id
@@ -133,7 +148,10 @@ module.exports = (musicorum) => {
 
       ScheduleJoi.notRequired.validateAsync(patch)
         .then(() => {
-          const newSchedule = Object.assign(schedule, patch)
+          const newSchedule = {
+            schedule,
+            ...patch
+          }
           req.user.save()
           res.json({ success: true, schedule: newSchedule })
         })
