@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="12a0dede-7d96-4cba-aea6-f63d2cf6603f" name="Default Changelist" comment="schedules list">
+    <list default="true" id="12a0dede-7d96-4cba-aea6-f63d2cf6603f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/db/schemas/Generation.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/middleware/admin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routers/controls.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/db/schemas/Schedule.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/schemas/Schedule.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/joi/schedule.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/joi/schedule.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/middleware/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/middleware/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routers/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routers/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routers/schedules.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routers/schedules.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MusicorumAPI.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/MusicorumAPI.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
@@ -71,7 +78,7 @@
       <workItem from="1576882371416" duration="70000" />
       <workItem from="1576952016224" duration="2376000" />
       <workItem from="1580776160010" duration="2088000" />
-      <workItem from="1581178744971" duration="11025000" />
+      <workItem from="1581178744971" duration="15100000" />
     </task>
     <task id="LOCAL-00001" summary="auth">
       <created>1576108646276</created>
@@ -87,7 +94,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576111127888</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="schedules list">
+      <created>1581204217995</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1581204217995</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
