@@ -2,8 +2,8 @@ const mongoose = require('mongoose')
 
 const Run = new mongoose.Schema({
   schedule: String,
-  startTime: Date,
-  endTime: Date,
+  startTime: String,
+  endTime: String,
   image: String,
   status: {
     type: String,

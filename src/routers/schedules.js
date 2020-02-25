@@ -1,5 +1,5 @@
 const chalk = require('chalk')
-const fetch = require('node-fetch')
+const { SchedulerAPI } = require('../utils/index.js')
 const auth = require('../middleware/auth.js')
 const User = require('../db/schemas/User.js')
 const Run = require('../db/schemas/Run.js')
@@ -36,9 +36,14 @@ module.exports = () => {
 
   router.post('/', auth, async (req, res) => {
     try {
-      const { schedules } = req.user
+      const { schedules, lastfm } = req.user
 
       if (schedules && schedules.length > 2) {
+        res.status(400).json(messages.SCHEDULES_LIMIT_REACHED)
+        return
+      }
+
+      if (!lastfm) {
         res.status(400).json(messages.SCHEDULES_LIMIT_REACHED)
         return
       }
@@ -51,13 +56,14 @@ module.exports = () => {
           User.update(
             { _id: req.user._id },
             { $push: { schedules: sch } },
-            (err) => {
+            async (err) => {
               if (err) {
                 res.status(400).json(messages.INTERNAL_ERROR)
               } else {
                 res.json({
                   success: true
                 })
+                console.log(await SchedulerAPI.startSchedule(req.user._id, sch._id))
               }
             }
           )
@@ -98,8 +104,7 @@ module.exports = () => {
       await req.user.save()
 
       await res.json({ success: true })
-
-      fetch(`${process.env.SCHEDULER_URL}tasks/${id}`)
+      console.log(await SchedulerAPI.stopSchedule(id))
     } catch (err) {
       res.status(500).json(messages.INTERNAL_ERROR)
       console.error(chalk.bgRed(' ERROR ') + ' ' + err)
@@ -190,8 +195,6 @@ module.exports = () => {
         delete s._id
         delete s.__v
         delete s.schedule
-        s.startTime = new Date(run._doc.startTime).getTime()
-        s.endTime = new Date(run._doc.startTime).getTime()
         return s
       })
 

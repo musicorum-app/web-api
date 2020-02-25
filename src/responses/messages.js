@@ -61,5 +61,12 @@ module.exports = {
       message: 'Invalid patch.',
       error: 'INVALID_PATCH'
     }
+  },
+  LATFM_NOT_SIGNED: {
+    error: {
+      code: 'A#400#009',
+      message: 'Account not ssigned with last.fm.',
+      error: 'LATFM_NOT_SIGNED'
+    }
   }
 }
