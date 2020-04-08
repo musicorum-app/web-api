@@ -7,6 +7,7 @@ const mongoose = require('mongoose')
 const authRouter = require('./routers/auth.js')
 const schedulesRouter = require('./routers/schedules.js')
 const controlsRouter = require('./routers/controls.js')
+const mobileRouter = require('./routers/mobile.js')
 const moment = require('moment')
 
 // const whitelist = process.env.CORS_WHITELIST.split(';')
@@ -32,6 +33,7 @@ module.exports = class MusicorumAPI {
     app.use('/auth', authRouter(this))
     app.use('/schedules', schedulesRouter(this))
     app.use('/controls', controlsRouter(this))
+    app.use('/mobile', mobileRouter(this))
     app.listen(this.port, () =>
       console.log(chalk.bgGreen(' SUCCESS ') + ' Web server started on port ' + chalk.blue(this.port)))
   }

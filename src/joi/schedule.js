@@ -30,7 +30,7 @@ module.exports = Joi.object({
     .required(),
 
   theme: Joi.string()
-    .valid('grid', 'tops')
+    .valid('grid', 'tops', 'duotone')
     .required(),
 
   themeOptions: {
@@ -41,6 +41,8 @@ module.exports = Joi.object({
       .max(15),
 
     size: Joi.number(),
+
+    pallete: Joi.string(),
 
     names: Joi.boolean(),
 

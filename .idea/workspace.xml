@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12a0dede-7d96-4cba-aea6-f63d2cf6603f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/db/schemas/Generation.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/middleware/admin.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routers/controls.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MusicorumAPI.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/MusicorumAPI.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/db/schemas/Run.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/schemas/Run.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routers/schedules.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routers/schedules.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -78,7 +75,9 @@
       <workItem from="1576882371416" duration="70000" />
       <workItem from="1576952016224" duration="2376000" />
       <workItem from="1580776160010" duration="2088000" />
-      <workItem from="1581178744971" duration="15100000" />
+      <workItem from="1581178744971" duration="15890000" />
+      <workItem from="1581211833931" duration="218000" />
+      <workItem from="1581212079774" duration="1963000" />
     </task>
     <task id="LOCAL-00001" summary="auth">
       <created>1576108646276</created>
@@ -101,7 +100,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581204217995</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="controls">
+      <created>1581208834951</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1581208834951</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -124,6 +130,7 @@
     <MESSAGE value="Things" />
     <MESSAGE value="auth" />
     <MESSAGE value="schedules list" />
-    <option name="LAST_COMMIT_MESSAGE" value="schedules list" />
+    <MESSAGE value="controls" />
+    <option name="LAST_COMMIT_MESSAGE" value="controls" />
   </component>
 </project>
