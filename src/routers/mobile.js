@@ -8,7 +8,7 @@ const LastFM = new LFM(process.env.LASTFM_KEY, process.env.LASTFM_SECRET)
 module.exports = () => {
   router.get('/login', async (req, res) => {
     const { callback } = req.query
-    const red = `${process.env.API_URL}/callback?redirect=${callback}`
+    const red = `${process.env.API_URL}/mobile/callback?redirect=${callback}`
     res.redirect(`http://www.last.fm/api/auth/?api_key=${process.env.LASTFM_KEY}&cb=${encodeURIComponent(red)}`)
   })
 
