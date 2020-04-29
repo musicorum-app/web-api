@@ -30,7 +30,7 @@ module.exports = Joi.object({
     .required(),
 
   theme: Joi.string()
-    .valid('grid', 'tops', 'duotone')
+    .valid('grid', 'tops', 'duotone', 'darkly')
     .required(),
 
   themeOptions: {
@@ -50,7 +50,12 @@ module.exports = Joi.object({
 
     modules: Joi.array(),
 
-    messages: Joi.object()
+    messages: Joi.object(),
+
+    color: Joi.string(),
+
+    accent: Joi.string()
+
   }
 })
 
@@ -77,7 +82,7 @@ module.exports.notRequired = Joi.object({
     .valid(...Object.keys(timezones)),
 
   theme: Joi.string()
-    .valid('grid', 'tops'),
+    .valid('grid', 'tops', 'duotone', 'darkly'),
 
   themeOptions: {
     period: Joi.string()

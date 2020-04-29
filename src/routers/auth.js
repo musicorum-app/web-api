@@ -8,6 +8,9 @@ const messages = require('../responses/messages.js')
 const express = require('express')
 const router = express.Router()
 const { MiscUtils, crypto } = require('../utils')
+const Sentry = require('@sentry/node')
+
+Sentry.init({ dsn: process.env.SENTRY_DSN })
 
 const LastFM = new LFM(process.env.LASTFM_KEY, process.env.LASTFM_SECRET)
 
@@ -62,6 +65,7 @@ module.exports = () => {
       }
     } catch (err) {
       res.status(500).json(messages.INTERNAL_ERROR)
+      Sentry.captureException(err)
       console.error(chalk.bgRed(' ERROR ') + ' ' + err)
       console.error(err)
     }
@@ -141,6 +145,7 @@ module.exports = () => {
         twitterSecretTokens.delete(tokenId)
       })
     } catch (err) {
+      Sentry.captureException(err)
       res.status(500).json(messages.INTERNAL_ERROR)
       console.error(chalk.bgRed(' ERROR ') + ' ' + err)
       console.error(err)
@@ -164,6 +169,7 @@ module.exports = () => {
       })
       req.user.save()
     } catch (err) {
+      Sentry.captureException(err)
       res.status(500).json(messages.INTERNAL_ERROR)
       console.error(chalk.bgRed(' ERROR ') + ' ' + err)
       console.error(err)

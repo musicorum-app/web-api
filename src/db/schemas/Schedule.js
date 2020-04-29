@@ -12,7 +12,7 @@ const Schedule = new mongoose.Schema({
   text: String,
   theme: {
     type: String,
-    enum: ['grid', 'tops']
+    enum: ['grid', 'tops', 'duotone', 'darkly']
   },
   themeOptions: Object
 })

@@ -9,6 +9,7 @@ const schedulesRouter = require('./routers/schedules.js')
 const controlsRouter = require('./routers/controls.js')
 const mobileRouter = require('./routers/mobile.js')
 const moment = require('moment')
+const Sentry = require('@sentry/node')
 
 // const whitelist = process.env.CORS_WHITELIST.split(';')
 // const corsOptions = {
@@ -20,12 +21,14 @@ const moment = require('moment')
 //     }
 //   }
 // }
+Sentry.init({ dsn: process.env.SENTRY_DSN })
 
 module.exports = class MusicorumAPI {
   init () {
     this.connectDatabase()
     this.port = process.env.PORT
 
+    app.use(Sentry.Handlers.requestHandler())
     app.use(express.json())
     app.use(cors())
     app.use(morgan((t, q, s) => this.morganPattern(t, q, s)))
@@ -34,6 +37,8 @@ module.exports = class MusicorumAPI {
     app.use('/schedules', schedulesRouter(this))
     app.use('/controls', controlsRouter(this))
     app.use('/mobile', mobileRouter(this))
+    app.use(Sentry.Handlers.errorHandler())
+
     app.listen(this.port, () =>
       console.log(chalk.bgGreen(' SUCCESS ') + ' Web server started on port ' + chalk.blue(this.port)))
   }
