@@ -8,8 +8,10 @@ const authRouter = require('./routers/auth.js')
 const schedulesRouter = require('./routers/schedules.js')
 const controlsRouter = require('./routers/controls.js')
 const mobileRouter = require('./routers/mobile.js')
+const labsRouter = require('./routers/labs.js')
 const moment = require('moment')
 const Sentry = require('@sentry/node')
+const Spotify = require('node-spotify-api')
 
 // const whitelist = process.env.CORS_WHITELIST.split(';')
 // const corsOptions = {
@@ -26,6 +28,7 @@ Sentry.init({ dsn: process.env.SENTRY_DSN })
 module.exports = class MusicorumAPI {
   init () {
     this.connectDatabase()
+    this.initAPIS()
     this.port = process.env.PORT
 
     app.use(Sentry.Handlers.requestHandler())
@@ -37,6 +40,7 @@ module.exports = class MusicorumAPI {
     app.use('/schedules', schedulesRouter(this))
     app.use('/controls', controlsRouter(this))
     app.use('/mobile', mobileRouter(this))
+    app.use('/labs', labsRouter(this))
     app.use(Sentry.Handlers.errorHandler())
 
     app.listen(this.port, () =>
@@ -69,5 +73,12 @@ module.exports = class MusicorumAPI {
       })
     this.database = mongoose.connection
     this.database.on('error', console.error.bind(console, chalk.bgRed(' DATABASE CONNECTION ERROR ')))
+  }
+
+  async initAPIS () {
+    this.spotify = new Spotify({
+      id: process.env.SPOTIFY_ID,
+      secret: process.env.SPOTIFY_SECRET
+    })
   }
 }

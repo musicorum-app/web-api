@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12a0dede-7d96-4cba-aea6-f63d2cf6603f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/routers/labs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/db/schemas/Run.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/schemas/Run.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routers/schedules.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routers/schedules.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MusicorumAPI.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/MusicorumAPI.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -55,6 +58,18 @@
       </list>
     </option>
   </component>
+  <component name="RunManager">
+    <configuration name="start-dev" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start-dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -78,6 +93,9 @@
       <workItem from="1581178744971" duration="15890000" />
       <workItem from="1581211833931" duration="218000" />
       <workItem from="1581212079774" duration="1963000" />
+      <workItem from="1589365388582" duration="22000" />
+      <workItem from="1589376836642" duration="1449000" />
+      <workItem from="1589551462302" duration="4034000" />
     </task>
     <task id="LOCAL-00001" summary="auth">
       <created>1576108646276</created>
