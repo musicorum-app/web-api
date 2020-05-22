@@ -77,6 +77,7 @@ module.exports = () => {
         res.status(500).json(messages.INTERNAL_ERROR)
         console.error(chalk.bgRed(' ERROR ') + ' ' + err)
         console.error(err)
+        Sentry.captureException(err)
         return
       }
 
@@ -116,22 +117,26 @@ module.exports = () => {
           res.status(500).json(messages.INTERNAL_ERROR)
           console.error(chalk.bgRed(' ERROR ') + ' ' + err)
           console.error(err)
+          Sentry.captureException(err)
           return
         }
 
         const userDoc = await User.findOne({ 'twitter.id': user.userId })
 
+        const twitterAcc = new User.TwitterAccount({
+          accessToken: crypto.encryptToken(user.userToken, process.env.TWITTER_CRYPTO),
+          accessSecret: crypto.encryptToken(user.userTokenSecret, process.env.TWITTER_CRYPTO),
+          id: user.userId
+        })
+
         if (userDoc) {
+          userDoc.twitter = twitterAcc
+          await userDoc.save()
           res.json({
             token: userDoc.generateAuthToken(),
             firstLogin: false
           })
         } else {
-          const twitterAcc = new User.TwitterAccount({
-            accessToken: crypto.encryptToken(user.userToken, process.env.TWITTER_CRYPTO),
-            accessSecret: crypto.encryptToken(user.userTokenSecret, process.env.TWITTER_CRYPTO),
-            id: user.userId
-          })
           const newUser = new User({
             twitter: twitterAcc
           })
