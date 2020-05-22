@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12a0dede-7d96-4cba-aea6-f63d2cf6603f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/routers/labs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MusicorumAPI.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/MusicorumAPI.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routers/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routers/auth.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -95,7 +91,8 @@
       <workItem from="1581212079774" duration="1963000" />
       <workItem from="1589365388582" duration="22000" />
       <workItem from="1589376836642" duration="1449000" />
-      <workItem from="1589551462302" duration="4034000" />
+      <workItem from="1589551462302" duration="6042000" />
+      <workItem from="1590184648030" duration="3818000" />
     </task>
     <task id="LOCAL-00001" summary="auth">
       <created>1576108646276</created>
@@ -125,7 +122,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581208834951</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="cache api">
+      <created>1589575527930</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1589575527930</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -149,6 +153,7 @@
     <MESSAGE value="auth" />
     <MESSAGE value="schedules list" />
     <MESSAGE value="controls" />
-    <option name="LAST_COMMIT_MESSAGE" value="controls" />
+    <MESSAGE value="cache api" />
+    <option name="LAST_COMMIT_MESSAGE" value="cache api" />
   </component>
 </project>
