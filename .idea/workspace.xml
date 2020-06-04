@@ -2,8 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12a0dede-7d96-4cba-aea6-f63d2cf6603f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/apis/Generator.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/apis/UploadAPI.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/presentations.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/formatter.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routers/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routers/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apis/Deezer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/apis/Deezer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apis/Spotify.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/apis/Spotify.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/db/schemas/Playlist.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/schemas/Playlist.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/joi/playlist.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/joi/playlist.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/responses/messages.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/responses/messages.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routers/playlist.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routers/playlist.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/cache.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/cache.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,13 +37,25 @@
         <option value="metehus &lt;methidezeeni@gmail.com&gt;" />
       </list>
     </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
   </component>
   <component name="ProjectId" id="1UlWi13JTd5m6xyeCZsRr3LEysi" />
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="javascript.nodejs.core.library.configured.version" value="10.15.0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -41,6 +66,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="JavaScript.Libraries" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -92,7 +118,11 @@
       <workItem from="1589365388582" duration="22000" />
       <workItem from="1589376836642" duration="1449000" />
       <workItem from="1589551462302" duration="6042000" />
-      <workItem from="1590184648030" duration="3818000" />
+      <workItem from="1590184648030" duration="19627000" />
+      <workItem from="1590254605887" duration="11134000" />
+      <workItem from="1590343244217" duration="360000" />
+      <workItem from="1590353491208" duration="751000" />
+      <workItem from="1590412775043" duration="220000" />
     </task>
     <task id="LOCAL-00001" summary="auth">
       <created>1576108646276</created>
@@ -129,7 +159,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589575527930</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="q funcione 🙏🙏">
+      <created>1590189165572</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1590189165572</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -154,6 +191,7 @@
     <MESSAGE value="schedules list" />
     <MESSAGE value="controls" />
     <MESSAGE value="cache api" />
-    <option name="LAST_COMMIT_MESSAGE" value="cache api" />
+    <MESSAGE value="q funcione " />
+    <option name="LAST_COMMIT_MESSAGE" value="q funcione " />
   </component>
 </project>
