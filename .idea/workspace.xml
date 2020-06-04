@@ -2,23 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12a0dede-7d96-4cba-aea6-f63d2cf6603f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/apis/Generator.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/apis/UploadAPI.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/presentations.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/formatter.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apis/Deezer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/apis/Deezer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apis/Spotify.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/apis/Spotify.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/db/schemas/Playlist.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/schemas/Playlist.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/joi/playlist.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/joi/playlist.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/responses/messages.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/responses/messages.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routers/playlist.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routers/playlist.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/cache.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/cache.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/index.js" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -67,18 +52,6 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="JavaScript.Libraries" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager">
     <configuration name="start-dev" type="js.build_tools.npm" nameIsGenerated="true">
@@ -177,13 +150,12 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Things" />
@@ -193,5 +165,15 @@
     <MESSAGE value="cache api" />
     <MESSAGE value="q funcione " />
     <option name="LAST_COMMIT_MESSAGE" value="q funcione " />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="255" y="0" key="CommitChangelistDialog2" timestamp="1591294777773">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state x="255" y="0" key="CommitChangelistDialog2/0.0.2560.1040@0.0.2560.1040" timestamp="1591294777773" />
+    <state x="445" y="429" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1591294780280">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state x="445" y="429" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2560.1040@0.0.2560.1040" timestamp="1591294780280" />
   </component>
 </project>

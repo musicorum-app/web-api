@@ -81,6 +81,7 @@ module.exports = (musicorum) => {
           else if (deezerTrack && deezerTrack.album.cover_big) image = deezerTrack.album.cover_big
           playlistItems.push(new PlaylistItem({
             name: items[i].name,
+            artist: items[i].artist,
             url: items[i].url,
             spotifyId: artist.id || null,
             deezerId: deezerTrack ? deezerTrack.id : null,
