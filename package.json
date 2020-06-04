@@ -14,7 +14,7 @@
   "author": "metehus",
   "license": "GPL-3.0",
   "dependencies": {
-    "@hapi/joi": "^16.1.7",
+    "@hapi/joi": "^17.1.1",
     "@sentry/node": "^5.15.5",
     "chalk": "^2.4.2",
     "cors": "^2.8.5",
@@ -23,13 +23,15 @@
     "lastfm-node-client": "^2.1.0",
     "login-with-twitter": "^1.2.2",
     "moment": "^2.24.0",
-    "mongoose": "^5.7.5",
+    "mongoose": "^5.9.6",
     "morgan": "^1.9.1",
     "node-fetch": "^2.6.0",
     "node-spotify-api": "^1.1.1",
-    "twit": "^2.2.11"
+    "twit": "^2.2.11",
+    "form-data": "latest"
   },
   "devDependencies": {
+    "@types/hapi__joi": "^17.1.0",
     "dotenv": "^8.1.0",
     "eslint": "^6.5.1",
     "eslint-config-standard": "^14.1.0",

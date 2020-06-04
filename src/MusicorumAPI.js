@@ -9,9 +9,10 @@ const schedulesRouter = require('./routers/schedules.js')
 const controlsRouter = require('./routers/controls.js')
 const mobileRouter = require('./routers/mobile.js')
 const labsRouter = require('./routers/labs.js')
+const playlistsRouter = require('./routers/playlist.js')
 const moment = require('moment')
 const Sentry = require('@sentry/node')
-const Spotify = require('node-spotify-api')
+const SpotifyApi = require('./apis/Spotify.js')
 
 // const whitelist = process.env.CORS_WHITELIST.split(';')
 // const corsOptions = {
@@ -41,6 +42,11 @@ module.exports = class MusicorumAPI {
     app.use('/controls', controlsRouter(this))
     app.use('/mobile', mobileRouter(this))
     app.use('/labs', labsRouter(this))
+    app.use('/playlists', playlistsRouter(this))
+    app.use((req, res) => res.json({
+      error: 'NOT_FOUND',
+      message: 'Not found.'
+    }))
     app.use(Sentry.Handlers.errorHandler())
 
     app.listen(this.port, () =>
@@ -76,7 +82,7 @@ module.exports = class MusicorumAPI {
   }
 
   async initAPIS () {
-    this.spotify = new Spotify({
+    this.spotify = new SpotifyApi({
       id: process.env.SPOTIFY_ID,
       secret: process.env.SPOTIFY_SECRET
     })
