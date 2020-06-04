@@ -1,11 +1,11 @@
 module.exports = {
-  generateRandomString (length) {
+  generateRandomString (length, extra = false) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789' +
+      (extra ? '_-' : '')
+
     let result = ''
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-    const charactersLength = characters.length
-    for (let i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength))
-    }
+    for (var i = 0; i < length; i++) result += characters.charAt(Math.floor(Math.random() * characters.length))
+
     return result
   },
 
@@ -19,5 +19,17 @@ module.exports = {
       delete obj[key]
     }
     return obj
+  },
+
+  chunkArray (array, pieces) {
+    return Array(Math.ceil(array.length / pieces)).fill().map((_, i) => array.slice(i * pieces, i * pieces + pieces))
+  },
+
+  wait (ms) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve()
+      }, ms)
+    })
   }
 }

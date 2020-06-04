@@ -1,0 +1,10 @@
+[
+  {
+    "slang": "PR_TEST",
+    "name": "pres. test",
+    "playlist": {
+      "name": "{{user}} top playlist",
+      "description": "A cool playlist description."
+    }
+  }
+]

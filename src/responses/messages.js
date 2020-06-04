@@ -68,5 +68,19 @@ module.exports = {
       message: 'Account not ssigned with last.fm.',
       error: 'LATFM_NOT_SIGNED'
     }
+  },
+  NOT_FOUND: {
+    error: {
+      code: 'A#404#010',
+      message: 'Item not found.',
+      error: 'NOT_FOUND'
+    }
+  },
+  NOT_IMPLEMENTED: {
+    error: {
+      code: 'A#501#011',
+      message: 'Not yet implemented.',
+      error: 'NOT_IMPLEMENTED'
+    }
   }
 }
