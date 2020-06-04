@@ -19,6 +19,10 @@ module.exports = class CacheBridge {
     return CacheBridge.request('cache/artists', { artists })
   }
 
+  static async fetchTracksIDs (tracks) {
+    return CacheBridge.request('cache/tracks', { tracks })
+  }
+
   static async chunkRequests (mapper, list, itemMapper) {
     const reqs = []
 
@@ -38,6 +42,12 @@ module.exports = class CacheBridge {
 
   static async getArtistsFromDeezer (list) {
     const mapper = async a => (new Promise(resolve => resolve(DeezerAPI.searchArtist(a))))
+    const itemMapper = r => r.data.length ? r.data[0] : null
+    return CacheBridge.chunkRequests(mapper, list, itemMapper)
+  }
+
+  static async getTracksFromDeezer (list) {
+    const mapper = async ({ name, artist }) => (new Promise(resolve => resolve(DeezerAPI.searchTrack(name, artist))))
     const itemMapper = r => r.data.length ? r.data[0] : null
     return CacheBridge.chunkRequests(mapper, list, itemMapper)
   }

@@ -75,5 +75,12 @@ module.exports = {
       message: 'Item not found.',
       error: 'NOT_FOUND'
     }
+  },
+  NOT_IMPLEMENTED: {
+    error: {
+      code: 'A#501#011',
+      message: 'Not yet implemented.',
+      error: 'NOT_IMPLEMENTED'
+    }
   }
 }

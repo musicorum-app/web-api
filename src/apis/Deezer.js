@@ -13,4 +13,9 @@ module.exports = class DeezerAPI {
   static searchArtist (name) {
     return DeezerAPI.request(`search/artist?q=${encodeURIComponent(name)}`)
   }
+
+  static searchTrack (name, artist) {
+    console.log(name)
+    return DeezerAPI.request(`search/track?q=artist:"${encodeURIComponent(artist)}" track:"${encodeURIComponent(name)}"`)
+  }
 }

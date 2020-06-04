@@ -4,6 +4,7 @@ const PlaylistItem = new mongoose.Schema({
   name: String,
   artist: String,
   image: String,
+  url: String,
   spotifyId: String,
   deezerId: String,
   youtubeId: String

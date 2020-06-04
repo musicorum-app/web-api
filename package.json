@@ -27,7 +27,8 @@
     "morgan": "^1.9.1",
     "node-fetch": "^2.6.0",
     "node-spotify-api": "^1.1.1",
-    "twit": "^2.2.11"
+    "twit": "^2.2.11",
+    "form-data": "latest"
   },
   "devDependencies": {
     "@types/hapi__joi": "^17.1.0",
