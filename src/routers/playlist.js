@@ -81,6 +81,7 @@ module.exports = (musicorum) => {
           else if (deezerTrack && deezerTrack.album.cover_big) image = deezerTrack.album.cover_big
           playlistItems.push(new PlaylistItem({
             name: items[i].name,
+            artist: items[i].artist,
             url: items[i].url,
             spotifyId: artist.id || null,
             deezerId: deezerTrack ? deezerTrack.id : null,
@@ -96,8 +97,12 @@ module.exports = (musicorum) => {
 
       const upload = await GeneratorAPI.uploadCover(body.user, body.userImage)
 
+      const id = MiscUtils.generateRandomString(8, true)
+      const serviceDescription = presentation.playlist.descriptionService
+        .replace('{{url}}', `${process.env.PLAYLIST_URL}/${id}`)
+
       const newPlaylist = new Playlist({
-        _id: MiscUtils.generateRandomString(8, true),
+        _id: id,
         name: presentation.playlist.name.replace('{{user}}', body.user),
         createdAt: new Date().getTime(),
         type: body.type,
@@ -105,6 +110,7 @@ module.exports = (musicorum) => {
         image: `https://share.musc.pw/${upload.name}`,
         presentation: body.presentation,
         description: presentation.playlist.description,
+        serviceDescription,
         items: playlistItems
       })
 

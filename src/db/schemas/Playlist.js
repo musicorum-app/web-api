@@ -19,6 +19,7 @@ const Playlist = new mongoose.Schema({
   image: String,
   presentation: String,
   description: String,
+  serviceDescription: String,
   items: [PlaylistItem]
 }, { _id: false })
 
