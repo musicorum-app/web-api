@@ -22,7 +22,7 @@ const TW = new LoginWithTwitter({
 
 const twitterSecretTokens = new Map()
 
-module.exports = () => {
+module.exports = musicorum => {
   router.get('/me', auth, async (req, res) => {
     try {
       const { user } = req
@@ -94,6 +94,23 @@ module.exports = () => {
   router.get('/lastfm', async (req, res) => {
     res.json({
       url: `http://www.last.fm/api/auth/?api_key=${process.env.LASTFM_KEY}&cb=${process.env.LASTFM_CALLBACK_URL}`
+    })
+  })
+
+  router.get('/spotify', async (req, res) => {
+    const scopes = 'ugc-image-upload user-read-private playlist-modify-public'
+    res.json({
+      url: 'https://accounts.spotify.com/authorize?response_type=code' +
+        `&client_id=${process.env.SPOTIFY_ID}&scope=${encodeURIComponent(scopes)}&redirect_uri=${process.env.SPOTIFY_CALLBACK_URL}`
+    })
+  })
+
+  router.get('/spotify/callback', async (req, res) => {
+    const { code } = req.query
+    const tokens = await musicorum.spotify.getTokenFromCode(code)
+    res.json({
+      user: await musicorum.spotify.getUserFromToken(tokens.access_token),
+      token: tokens.access_token
     })
   })
 

@@ -4,7 +4,8 @@
     "name": "pres. test",
     "playlist": {
       "name": "{{user}} top playlist",
-      "description": "A cool playlist description."
+      "description": "A cool playlist description.",
+      "descriptionService": "A cool playlist description here. Saved from {{url}}."
     }
   }
 ]
