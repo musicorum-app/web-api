@@ -97,8 +97,12 @@ module.exports = (musicorum) => {
 
       const upload = await GeneratorAPI.uploadCover(body.user, body.userImage)
 
+      const id = MiscUtils.generateRandomString(8, true)
+      const serviceDescription = presentation.playlist.descriptionService
+        .replace('{{url}}', `${process.env.PLAYLIST_URL}/${id}`)
+
       const newPlaylist = new Playlist({
-        _id: MiscUtils.generateRandomString(8, true),
+        _id: id,
         name: presentation.playlist.name.replace('{{user}}', body.user),
         createdAt: new Date().getTime(),
         type: body.type,
@@ -106,6 +110,7 @@ module.exports = (musicorum) => {
         image: `https://share.musc.pw/${upload.name}`,
         presentation: body.presentation,
         description: presentation.playlist.description,
+        serviceDescription,
         items: playlistItems
       })
 
