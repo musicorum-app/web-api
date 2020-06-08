@@ -114,6 +114,14 @@ module.exports = musicorum => {
     })
   })
 
+  router.get('/deezer', async (req, res) => {
+    const scopes = 'manage_library,basic_access'
+    res.json({
+      url: `https://connect.deezer.com/oauth/auth.php?app_id=${process.env.DEEZER_ID}` +
+        `&redirect_uri=${process.env.DEEZER_CALLBACK_URL}&perms=${encodeURIComponent(scopes)}&response_type=token`
+    })
+  })
+
   router.post('/twitter/callback', async (req, res) => {
     try {
       const { oauthToken, oauthVerifier, tokenId } = req.body
