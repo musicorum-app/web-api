@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="12a0dede-7d96-4cba-aea6-f63d2cf6603f" name="Default Changelist" comment="hitfix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apis/Spotify.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/apis/Spotify.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/presentations.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/presentations.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/db/schemas/Playlist.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/schemas/Playlist.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apis/Deezer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/apis/Deezer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routers/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routers/auth.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routers/playlist.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routers/playlist.js" afterDir="false" />
     </list>
@@ -190,26 +188,26 @@
     <option name="LAST_COMMIT_MESSAGE" value="hitfix" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="255" y="0" width="1039" height="1039" key="CommitChangelistDialog2" timestamp="1591302886386">
+    <state x="255" y="0" width="1039" height="1039" key="CommitChangelistDialog2" timestamp="1591580181403">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state x="255" y="0" width="1039" height="1039" key="CommitChangelistDialog2/0.0.2560.1040@0.0.2560.1040" timestamp="1591302886386" />
-    <state width="1257" height="271" key="GridCell.Tab.0.bottom" timestamp="1591564867577">
+    <state x="255" y="0" width="1039" height="1039" key="CommitChangelistDialog2/0.0.2560.1040@0.0.2560.1040" timestamp="1591580181403" />
+    <state width="1257" height="271" key="GridCell.Tab.0.bottom" timestamp="1591577289828">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="1257" height="271" key="GridCell.Tab.0.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1591564867577" />
-    <state width="1257" height="271" key="GridCell.Tab.0.center" timestamp="1591564867577">
+    <state width="1257" height="271" key="GridCell.Tab.0.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1591577289828" />
+    <state width="1257" height="271" key="GridCell.Tab.0.center" timestamp="1591577289828">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="1257" height="271" key="GridCell.Tab.0.center/0.0.2560.1040@0.0.2560.1040" timestamp="1591564867577" />
-    <state width="1257" height="271" key="GridCell.Tab.0.left" timestamp="1591564867577">
+    <state width="1257" height="271" key="GridCell.Tab.0.center/0.0.2560.1040@0.0.2560.1040" timestamp="1591577289828" />
+    <state width="1257" height="271" key="GridCell.Tab.0.left" timestamp="1591577289828">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="1257" height="271" key="GridCell.Tab.0.left/0.0.2560.1040@0.0.2560.1040" timestamp="1591564867577" />
-    <state width="1257" height="271" key="GridCell.Tab.0.right" timestamp="1591564867577">
+    <state width="1257" height="271" key="GridCell.Tab.0.left/0.0.2560.1040@0.0.2560.1040" timestamp="1591577289828" />
+    <state width="1257" height="271" key="GridCell.Tab.0.right" timestamp="1591577289828">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="1257" height="271" key="GridCell.Tab.0.right/0.0.2560.1040@0.0.2560.1040" timestamp="1591564867577" />
+    <state width="1257" height="271" key="GridCell.Tab.0.right/0.0.2560.1040@0.0.2560.1040" timestamp="1591577289828" />
     <state x="239" y="248" key="Vcs.Push.Dialog.v2" timestamp="1591299829133">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
@@ -218,5 +216,9 @@
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="445" y="429" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2560.1040@0.0.2560.1040" timestamp="1591294780280" />
+    <state x="310" y="229" width="672" height="678" key="search.everywhere.popup" timestamp="1591575207847">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state x="310" y="229" width="672" height="678" key="search.everywhere.popup/0.0.2560.1040@0.0.2560.1040" timestamp="1591575207847" />
   </component>
 </project>

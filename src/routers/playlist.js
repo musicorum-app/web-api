@@ -7,6 +7,8 @@ const { CacheBridge, MiscUtils, FormatterUtils } = require('../utils')
 const Sentry = require('@sentry/node')
 const presentations = require('../assets/presentations.json')
 const GeneratorAPI = require('../apis/Generator.js')
+const DeezerAPI = require('../apis/Deezer.js')
+const fetch = require('node-fetch')
 
 Sentry.init({ dsn: process.env.SENTRY_DSN })
 
@@ -126,6 +128,29 @@ module.exports = (musicorum) => {
         })
       }
       res.status(500).json(messages.INTERNAL_ERROR)
+    }
+  })
+
+  router.get('/deezer/me', async (req, res) => {
+    const token = req.headers.authorization
+
+    res.json(await DeezerAPI.getAuthenticatedProfile(token))
+  })
+
+  router.post('/deezer', async (req, res) => {
+    try {
+      const token = req.headers.authorization
+
+      const { id } = await DeezerAPI.createPlaylist(token, req.body.name)
+
+      const songs = req.body.items.filter(i => !!i.deezerId).map(i => i.deezerId)
+      await DeezerAPI.addTracksToPLaylist(token, id, songs)
+
+      res.json({
+        id
+      })
+    } catch (e) {
+      res.error(e)
     }
   })
 
