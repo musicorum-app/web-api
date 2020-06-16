@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12a0dede-7d96-4cba-aea6-f63d2cf6603f" name="Default Changelist" comment="hitfix">
+      <change afterPath="$PROJECT_DIR$/src/routers/rewind.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apis/Deezer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/apis/Deezer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routers/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routers/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routers/playlist.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routers/playlist.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MusicorumAPI.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/MusicorumAPI.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +27,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="deezer-playlist" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -188,26 +187,26 @@
     <option name="LAST_COMMIT_MESSAGE" value="hitfix" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="255" y="0" width="1039" height="1039" key="CommitChangelistDialog2" timestamp="1591580181403">
+    <state x="255" y="0" width="1039" height="1039" key="CommitChangelistDialog2" timestamp="1592310331499">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state x="255" y="0" width="1039" height="1039" key="CommitChangelistDialog2/0.0.2560.1040@0.0.2560.1040" timestamp="1591580181403" />
-    <state width="1257" height="271" key="GridCell.Tab.0.bottom" timestamp="1591577289828">
+    <state x="255" y="0" width="1039" height="1039" key="CommitChangelistDialog2/0.0.2560.1040@0.0.2560.1040" timestamp="1592310331499" />
+    <state width="1047" height="273" key="GridCell.Tab.0.bottom" timestamp="1592309736909">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="1257" height="271" key="GridCell.Tab.0.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1591577289828" />
-    <state width="1257" height="271" key="GridCell.Tab.0.center" timestamp="1591577289828">
+    <state width="1047" height="273" key="GridCell.Tab.0.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1592309736909" />
+    <state width="1047" height="273" key="GridCell.Tab.0.center" timestamp="1592309736909">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="1257" height="271" key="GridCell.Tab.0.center/0.0.2560.1040@0.0.2560.1040" timestamp="1591577289828" />
-    <state width="1257" height="271" key="GridCell.Tab.0.left" timestamp="1591577289828">
+    <state width="1047" height="273" key="GridCell.Tab.0.center/0.0.2560.1040@0.0.2560.1040" timestamp="1592309736909" />
+    <state width="1047" height="273" key="GridCell.Tab.0.left" timestamp="1592309736909">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="1257" height="271" key="GridCell.Tab.0.left/0.0.2560.1040@0.0.2560.1040" timestamp="1591577289828" />
-    <state width="1257" height="271" key="GridCell.Tab.0.right" timestamp="1591577289828">
+    <state width="1047" height="273" key="GridCell.Tab.0.left/0.0.2560.1040@0.0.2560.1040" timestamp="1592309736909" />
+    <state width="1047" height="273" key="GridCell.Tab.0.right" timestamp="1592309736909">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state width="1257" height="271" key="GridCell.Tab.0.right/0.0.2560.1040@0.0.2560.1040" timestamp="1591577289828" />
+    <state width="1047" height="273" key="GridCell.Tab.0.right/0.0.2560.1040@0.0.2560.1040" timestamp="1592309736909" />
     <state x="239" y="248" key="Vcs.Push.Dialog.v2" timestamp="1591299829133">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>

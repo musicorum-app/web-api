@@ -10,6 +10,7 @@ const controlsRouter = require('./routers/controls.js')
 const mobileRouter = require('./routers/mobile.js')
 const labsRouter = require('./routers/labs.js')
 const playlistsRouter = require('./routers/playlist.js')
+const rewindRoute = require('./routers/rewind')
 const moment = require('moment')
 const Sentry = require('@sentry/node')
 const SpotifyApi = require('./apis/Spotify.js')
@@ -43,6 +44,7 @@ module.exports = class MusicorumAPI {
     app.use('/mobile', mobileRouter(this))
     app.use('/labs', labsRouter(this))
     app.use('/playlists', playlistsRouter(this))
+    app.use('/rewind', rewindRoute(this))
     app.use((req, res) => res.json({
       error: 'NOT_FOUND',
       message: 'Not found.'
