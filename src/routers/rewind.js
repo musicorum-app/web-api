@@ -66,5 +66,33 @@ module.exports = (musicorum) => {
     }
   })
 
+  router.get('/tracks/features', async (req, res) => {
+    try {
+      if (!req.body.tracks) return res.status(400).json(messages.MISSING_PARAMETERS)
+      let { tracks } = req.body
+
+      if (!Array.isArray(tracks)) return res.status(400).json(messages.MISSING_PARAMETERS)
+
+      tracks = tracks.filter(t => t.name && t.artist)
+
+      if (!tracks.length) return res.status(400).json(messages.MISSING_PARAMETERS)
+
+      const list = await CacheBridge.fetchTracksIDs(tracks)
+
+      const spResult = await musicorum.spotify.request(`${API_URL}/audio-features?ids=${list.tracks.join()}`)
+
+      res.json(spResult.audio_features.map(t => ({
+        id: t.id,
+        danceability: t.danceability,
+        energy: t.energy,
+        tempo: t.tempo,
+        valence: t.valence
+      })))
+    } catch (e) {
+      console.error(e)
+      res.status(500).json(messages.INTERNAL_ERROR)
+    }
+  })
+
   return router
 }
