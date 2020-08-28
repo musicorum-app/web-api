@@ -1,5 +1,4 @@
 const fetch = require('node-fetch')
-const FormData = require('form-data')
 const API_URL = 'https://api.deezer.com/'
 
 module.exports = class DeezerAPI {
