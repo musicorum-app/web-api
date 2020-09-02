@@ -20,7 +20,7 @@ module.exports = (musicorum) => {
 
       const ids = trackList.filter(a => a).map(t => t.spotify)
 
-      const result = await musicorum.spotify.request(`${API_URL}/tracks?ids=${ids.join()}`)
+      const result = await musicorum.spotify.request(`${API_URL}/tracks?ids=${ids.join()}&market=US`)
 
       console.log(result)
       console.log(`${API_URL}/tracks?ids=${ids.join()}`)
