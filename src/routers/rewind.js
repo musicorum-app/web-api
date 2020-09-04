@@ -18,21 +18,23 @@ module.exports = (musicorum) => {
 
       const trackList = await ResourceManagerAPI.fetchTracks(tracks)
 
-      const ids = trackList.filter(a => a).map(t => t.spotify)
+      const ids = trackList.map(t => t ? t.spotify : null)
 
-      const result = await musicorum.spotify.request(`${API_URL}/tracks?ids=${ids.join()}&market=US`)
+      const spResult = await musicorum.spotify.request(`${API_URL}/tracks?ids=${ids.filter(a => a).join()}`)
+
+      const result = ids.map(i => i ? spResult.tracks.find(t => t.id === i) : null)
 
       console.log(result)
       console.log(`${API_URL}/tracks?ids=${ids.join()}`)
 
-      res.json(result.tracks.map(track => ({
+      res.json(result.map(track => track ? {
         id: track.id,
         name: track.name,
         artist: track.artists[0].name,
         album: track.album.name,
         cover: track.album.images[0].url,
         preview: track.preview_url
-      })))
+      } : null))
     } catch (e) {
       console.error(e)
       res.status(500).json(messages.INTERNAL_ERROR)
