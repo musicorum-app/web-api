@@ -20,12 +20,9 @@ module.exports = (musicorum) => {
 
       const ids = trackList.map(t => t ? t.spotify : null)
 
-      const spResult = await musicorum.spotify.request(`${API_URL}/tracks?ids=${ids.filter(a => a).join()}`)
+      const spResult = await musicorum.spotify.request(`${API_URL}/tracks?ids=${ids.filter(a => a).join()}&market=US`)
 
       const result = ids.map(i => i ? spResult.tracks.find(t => t.id === i) : null)
-
-      console.log(result)
-      console.log(`${API_URL}/tracks?ids=${ids.join()}`)
 
       res.json(result.map(track => track ? {
         id: track.id,
@@ -49,19 +46,19 @@ module.exports = (musicorum) => {
 
       const list = await ResourceManagerAPI.fetchArtists(artists)
 
-      console.log(list)
+      const ids = list.map(t => t ? t.spotify : null)
 
-      const ids = list.filter(a => a).map(t => t.spotify)
+      const spResult = await musicorum.spotify.request(`${API_URL}/artists?ids=${ids.filter(a => a).join()}&market=US`)
 
-      const result = await musicorum.spotify.request(`${API_URL}/artists?ids=${ids.join()}`)
+      const result = ids.map(i => i ? spResult.artists.find(t => t.id === i) : null)
 
-      res.json(result.artists.map(artist => ({
+      res.json(result.map(artist => artist ? {
         name: artist.name,
         popularity: artist.popularity,
         image: artist.images[0].url
-      })))
+      } : null))
     } catch (e) {
-      // console.error(e)
+      console.error(e)
       res.status(500).json(messages.INTERNAL_ERROR)
     }
   })
@@ -79,7 +76,7 @@ module.exports = (musicorum) => {
 
       const list = await CacheBridge.fetchTracksIDs(tracks)
 
-      const spResult = await musicorum.spotify.request(`${API_URL}/audio-features?ids=${list.tracks.join()}`)
+      const spResult = await musicorum.spotify.request(`${API_URL}/audio-features?ids=${list.tracks.join()}&market=US`)
 
       res.json(spResult.audio_features.map(t => ({
         id: t.id,
