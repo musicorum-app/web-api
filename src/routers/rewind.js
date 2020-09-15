@@ -21,16 +21,25 @@ module.exports = (musicorum) => {
       const ids = trackList.map(t => t ? t.spotify : null)
 
       const spResult = await musicorum.spotify.request(`${API_URL}/tracks?ids=${ids.filter(a => a).join()}&market=US`)
+      const audioFeatures = await musicorum.spotify.request(`${API_URL}/audio-features?ids=${ids.filter(a => a).join()}&market=US`)
+        .then(r => r.audio_features)
 
-      const result = ids.map(i => i ? spResult.tracks.find(t => t.id === i) : null)
+      const result = ids
+        .map(i => i ? spResult.tracks.find(t => t.id === i) : null)
+        .map(t => t ? { track: t, audio: audioFeatures.find(a => a.id === t.id) } : null)
 
-      res.json(result.map(track => track ? {
-        id: track.id,
-        name: track.name,
-        artist: track.artists[0].name,
-        album: track.album.name,
-        cover: track.album.images[0].url,
-        preview: track.preview_url
+      res.json(result.map(r => r ? {
+        id: r.track.id,
+        name: r.track.name,
+        artist: r.track.artists[0].name,
+        album: r.track.album.name,
+        cover: r.track.album.images[0].url,
+        preview: r.track.preview_url,
+        analysis: {
+          tempo: r.audio.tempo,
+          danceability: r.audio.danceability,
+          valence: r.audio.valence
+        }
       } : null))
     } catch (e) {
       console.error(e)
