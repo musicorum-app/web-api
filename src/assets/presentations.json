@@ -7,5 +7,14 @@
       "description": "A cool playlist description.",
       "descriptionService": "A cool playlist description here. Saved from {{url}}."
     }
+  },
+  {
+    "slang": "2020_REWIND",
+    "name": "Musicorum Rewind 2020",
+    "playlist": {
+      "name": "My 2020 rewind",
+      "description": "The most listened songs of 2020 for {{user}} from Musicorum Rewind 2020",
+      "descriptionService": "The most listened songs of 2020 for {{user}} from Musicorum Rewind 2020. Saved from {{url}}"
+    }
   }
 ]

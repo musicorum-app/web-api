@@ -95,24 +95,19 @@ module.exports = (musicorum) => {
         return res.status(501).json(messages.NOT_IMPLEMENTED)
       }
 
-      const presentation = presentations.find(p => p.slang === body.presentation)
-
       const upload = await GeneratorAPI.uploadCover(body.user, body.userImage)
-
       const id = MiscUtils.generateRandomString(8, true)
-      const serviceDescription = presentation.playlist.descriptionService
-        .replace('{{url}}', `${process.env.PLAYLIST_URL}/${id}`)
 
       const newPlaylist = new Playlist({
         _id: id,
-        name: presentation.playlist.name.replace('{{user}}', body.user),
-        createdAt: new Date().getTime(),
+        created_at: new Date().getTime(),
         type: body.type,
         user: body.user,
-        image: `https://share.musc.pw/${upload.name}`,
+        image: {
+          cdn: 'CDN-1',
+          path: upload.uploadedFiles[0].name
+        },
         presentation: body.presentation,
-        description: presentation.playlist.description,
-        serviceDescription,
         items: playlistItems
       })
 

@@ -5,21 +5,24 @@ const PlaylistItem = new mongoose.Schema({
   artist: String,
   image: String,
   url: String,
-  spotifyId: String,
-  deezerId: String,
-  youtubeId: String
+  spotify: String,
+  deezer: String,
+  youtube: String
 })
 
 const Playlist = new mongoose.Schema({
   _id: { type: String },
   name: String,
-  createdAt: Number,
+  created_at: Number,
   type: String,
   user: String,
-  image: String,
+  image: {
+    cdn: String,
+    path: String
+  },
   presentation: String,
   description: String,
-  serviceDescription: String,
+  service_description: String,
   items: [PlaylistItem]
 }, { _id: false })
 
