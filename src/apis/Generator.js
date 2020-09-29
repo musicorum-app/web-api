@@ -19,11 +19,6 @@ module.exports = class GeneratorAPI {
     }).then(r => r.buffer())
       .catch(e => console.error(e))
 
-
-    const s = new Readable()
-    s.push(buff)
-    s.push(null)
-
     return UploadAPI.image4io(buff, '/p')
   }
 }

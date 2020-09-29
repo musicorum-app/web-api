@@ -1,4 +1,5 @@
 const fetch = require('node-fetch')
+const FormData = require('form-data')
 const API_URL = 'https://api.deezer.com/'
 
 module.exports = class DeezerAPI {
@@ -32,11 +33,30 @@ module.exports = class DeezerAPI {
   }
 
   static addTracksToPLaylist (accessToken, playlist, tracks) {
+    tracks = [...new Set(tracks)]
     const params = new URLSearchParams({
       access_token: accessToken,
-      request_method: 'POST',
-      songs: tracks.join(',')
+      request_method: 'POST'
     })
-    return DeezerAPI.request(`playlist/${playlist}/tracks?${params}`)
+    return DeezerAPI.request(`playlist/${playlist}/tracks?${params.toString()}&songs=${tracks.join(',')}`)
+  }
+
+  static async updatePlaylistImage (accessToken, playlist, image) {
+    const infos = await DeezerAPI.request('infos')
+
+    const form = new FormData()
+    form.append('file', image, {
+      filename: 'cover.jpg',
+      contentType: 'image/jpeg'
+    })
+
+    const params = `access_token=${accessToken}&upload_token=${infos.upload_token}`
+
+    return fetch(`https://upload.deezer.com/playlist/${playlist}?${params}`, {
+      headers: form.getHeaders(),
+      method: 'POST',
+      body: form
+    })
+      .then(r => r.json())
   }
 }

@@ -12,14 +12,16 @@ module.exports = class ResourceManagerAPI {
   }
 
   static async fetchArtists (artists) {
-    return ResourceManagerAPI.request('/fetch/artists', { artists })
+    return ResourceManagerAPI.request('/resource/artists', { artists })
   }
 
   static async fetchAlbums (albums) {
-    return ResourceManagerAPI.request('/fetch/albums', { albums })
+    return ResourceManagerAPI.request('/resource/albums', { albums })
   }
 
-  static async fetchTracks (tracks) {
-    return ResourceManagerAPI.request('/fetch/tracks', { tracks })
+  static async fetchTracks (tracks, deezer = false) {
+    let query = '?'
+    if (deezer) query += 'deezer=true'
+    return ResourceManagerAPI.request('/resource/tracks' + query, { tracks })
   }
 }
