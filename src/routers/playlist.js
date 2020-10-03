@@ -32,12 +32,9 @@ module.exports = (musicorum) => {
 
       const playlist = FormatterUtils.formatPlaylist(foundPlaylist._doc)
 
-      const items = await ResourceManagerAPI.fetchTracks(playlist.items, true)
-      console.log(items)
-      playlist.items = playlist.items.map((item, index) => ({
-        ...item,
-        ...items[index]
-      }))
+      const items = await ResourceManagerAPI.fetchTracks(playlist.items)
+
+      playlist.items = items.tracks
 
       res.json(playlist)
     } catch (e) {
@@ -52,21 +49,15 @@ module.exports = (musicorum) => {
 
       await PlaylistJoi.validateAsync(body)
 
-      const playlistItems = []
+      let playlistItems = []
 
       if (['TOP_TRACKS', 'LOVED_TRACKS'].includes(body.type)) {
         const { items } = body
 
-        const tracks = await ResourceManagerAPI.fetchTracks(items, true)
+        const tracks = await ResourceManagerAPI.findTracks(items, true)
+        console.log(tracks)
 
-        for (const track of tracks) {
-          if (!track) continue
-
-          playlistItems.push(new PlaylistItem({
-            name: track.name,
-            artist: track.artist
-          }))
-        }
+        playlistItems = tracks.filter(t => !!t).map(t => t.hash)
       } else {
         return res.status(501).json(messages.NOT_IMPLEMENTED)
       }

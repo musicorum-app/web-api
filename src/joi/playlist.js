@@ -7,7 +7,7 @@ module.exports = Joi.object({
     .required(),
 
   presentation: Joi.string()
-    .valid(...presentations.map(p => p.slang))
+    .valid(...presentations.map(p => p.id))
     .required(),
 
   user: Joi.string()

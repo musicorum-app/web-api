@@ -23,7 +23,7 @@ const Playlist = new mongoose.Schema({
   presentation: String,
   description: String,
   service_description: String,
-  items: [PlaylistItem]
+  items: [String]
 }, { _id: false })
 
 module.exports.PlaylistItem = mongoose.model('PlaylistItem', PlaylistItem)
