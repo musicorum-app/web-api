@@ -1,3 +1,5 @@
+const { Readable } = require('stream')
+
 module.exports = {
   generateRandomString (length, extra = false) {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789' +
@@ -31,5 +33,15 @@ module.exports = {
         resolve()
       }, ms)
     })
+  },
+
+  bufferToStream (binary) {
+    return new Readable({
+      read () {
+        this.push(binary)
+        this.push(null)
+      }
+    })
   }
+
 }

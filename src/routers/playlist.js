@@ -8,6 +8,7 @@ const Sentry = require('@sentry/node')
 const presentations = require('../assets/presentations.json')
 const GeneratorAPI = require('../apis/Generator.js')
 const DeezerAPI = require('../apis/Deezer.js')
+const ResourceManagerAPI = require('../apis/ResourceManager.js')
 const fetch = require('node-fetch')
 
 Sentry.init({ dsn: process.env.SENTRY_DSN })
@@ -29,7 +30,13 @@ module.exports = (musicorum) => {
 
       if (!foundPlaylist) return res.status(404).json(messages.NOT_FOUND)
 
-      res.json(FormatterUtils.formatPlaylist(foundPlaylist._doc))
+      const playlist = FormatterUtils.formatPlaylist(foundPlaylist._doc)
+
+      const items = await ResourceManagerAPI.fetchTracks(playlist.items)
+
+      playlist.items = items.tracks
+
+      res.json(playlist)
     } catch (e) {
       console.error(e)
       res.status(500).json(messages.INTERNAL_ERROR)
@@ -42,77 +49,32 @@ module.exports = (musicorum) => {
 
       await PlaylistJoi.validateAsync(body)
 
-      const playlistItems = []
+      let playlistItems = []
 
-      if (body.type === 'TOP_ARTIST') {
-        const artists = body.items.map(a => a.name)
-        const spotifyIds = await CacheBridge.fetchArtistsIDs(artists)
-        const [spotifyArtists, deezerArtists] = await Promise.all([
-          musicorum.spotify.getArtists(spotifyIds.artists),
-          CacheBridge.getArtistsFromDeezer(artists)
-          // CacheBridge.getArtistsFromYoutube(artists)
-        ])
-
-        spotifyArtists.artists.forEach((artist, i) => {
-          let image = 'https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png'
-          const deezerArtist = deezerArtists[i]
-          if (artist && artist.images.length) image = artist.images[1].url
-          else if (deezerArtist && deezerArtist.cover_big) image = deezerArtist.cover_big
-          playlistItems.push(new PlaylistItem({
-            name: artists[i],
-            url: body.items[i].url,
-            spotifyId: artist.id || null,
-            deezerId: deezerArtist ? deezerArtist.id : null,
-            image
-            // youtubeId: youtubeChannels[i] ? youtubeChannels[i].id.channelId : null
-          }))
-        })
-      } else if (['TOP_TRACK', 'LOVED_TRACK'].includes(body.type)) {
+      if (['TOP_TRACKS', 'LOVED_TRACKS'].includes(body.type)) {
         const { items } = body
-        const spotifyIds = await CacheBridge.fetchTracksIDs(body.items)
-        const [spotifyTracks, deezerTracks] = await Promise.all([
-          musicorum.spotify.getTracks(spotifyIds.tracks),
-          CacheBridge.getTracksFromDeezer(body.items)
-          // CacheBridge.getArtistsFromYoutube(artists)
-        ])
 
-        spotifyTracks.tracks.forEach((artist, i) => {
-          let image = 'https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png'
-          const deezerTrack = deezerTracks[i]
-          if (artist && artist.album.images.length) image = artist.album.images[1].url
-          else if (deezerTrack && deezerTrack.album.cover_big) image = deezerTrack.album.cover_big
-          playlistItems.push(new PlaylistItem({
-            name: items[i].name,
-            artist: items[i].artist,
-            url: items[i].url,
-            spotifyId: artist.id || null,
-            deezerId: deezerTrack ? deezerTrack.id : null,
-            image
-            // youtubeId: youtubeChannels[i] ? youtubeChannels[i].id.channelId : null
-          }))
-        })
+        const tracks = await ResourceManagerAPI.findTracks(items, true)
+        console.log(tracks)
+
+        playlistItems = tracks.filter(t => !!t).map(t => t.hash)
       } else {
         return res.status(501).json(messages.NOT_IMPLEMENTED)
       }
 
-      const presentation = presentations.find(p => p.slang === body.presentation)
-
-      const upload = await GeneratorAPI.uploadCover(body.user, body.userImage)
-
+      const upload = await GeneratorAPI.uploadCover(body.user, body.user_image)
       const id = MiscUtils.generateRandomString(8, true)
-      const serviceDescription = presentation.playlist.descriptionService
-        .replace('{{url}}', `${process.env.PLAYLIST_URL}/${id}`)
 
       const newPlaylist = new Playlist({
         _id: id,
-        name: presentation.playlist.name.replace('{{user}}', body.user),
-        createdAt: new Date().getTime(),
+        created_at: new Date().getTime(),
         type: body.type,
         user: body.user,
-        image: `https://share.musc.pw/${upload.name}`,
+        image: {
+          cdn: 'CDN-1',
+          path: upload.uploadedFiles[0].name
+        },
         presentation: body.presentation,
-        description: presentation.playlist.description,
-        serviceDescription,
         items: playlistItems
       })
 
@@ -134,6 +96,8 @@ module.exports = (musicorum) => {
   router.get('/deezer/me', async (req, res) => {
     const token = req.headers.authorization
 
+    console.log(token)
+
     res.json(await DeezerAPI.getAuthenticatedProfile(token))
   })
 
@@ -143,8 +107,16 @@ module.exports = (musicorum) => {
 
       const { id } = await DeezerAPI.createPlaylist(token, req.body.name)
 
-      const songs = req.body.items.filter(i => !!i.deezerId).map(i => i.deezerId)
-      await DeezerAPI.addTracksToPLaylist(token, id, songs)
+      const songs = req.body.items.filter(i => !!i.deezer).map(i => i.deezer)
+      const tracksAdd = await DeezerAPI.addTracksToPLaylist(token, id, songs)
+      if (tracksAdd.error) {
+        console.error(tracksAdd)
+      }
+
+      const buff = await fetch(req.body.image)
+        .then(r => r.buffer())
+
+      await DeezerAPI.updatePlaylistImage(token, id, buff)
 
       res.json({
         id

@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 
 const Preset = new mongoose.Schema({
-  code: String,
   slug: String,
   user: String,
   theme: String,

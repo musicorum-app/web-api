@@ -3,11 +3,11 @@ const presentations = require('../assets/presentations.json')
 
 module.exports = Joi.object({
   type: Joi.string()
-    .valid('TOP_ARTIST', 'TOP_TRACK', 'TOP_ALBUM', 'LOVED_TRACK')
+    .valid('TOP_ARTISTS', 'TOP_TRACKS', 'TOP_ALBUMS', 'LOVED_TRACKS')
     .required(),
 
   presentation: Joi.string()
-    .valid(...presentations.map(p => p.slang))
+    .valid(...presentations.map(p => p.id))
     .required(),
 
   user: Joi.string()
@@ -15,7 +15,7 @@ module.exports = Joi.object({
     .max(90)
     .required(),
 
-  userImage: Joi.string()
+  user_image: Joi.string()
     .min(10)
     .max(400)
     .required(),
