@@ -41,4 +41,21 @@ module.exports = class UploadAPI {
 
     return res.json()
   }
+
+  static async cloudinary (file, preset) {
+    const id = generateRandomString(32)
+    const form = new FormData()
+    form.append('upload_preset', preset)
+    form.append('file', file, {
+      filename: id + '.jpg'
+    })
+
+    const res = await fetch(process.env.CLOUDINARY_URL, {
+      method: 'POST',
+      headers: form.getHeaders(),
+      body: form
+    })
+
+    return res.json()
+  }
 }

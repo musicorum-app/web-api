@@ -55,7 +55,6 @@ module.exports = (musicorum) => {
         const { items } = body
 
         const tracks = await ResourceManagerAPI.findTracks(items, true)
-        console.log(tracks)
 
         playlistItems = tracks.filter(t => !!t).map(t => t.hash)
       } else {
@@ -71,8 +70,8 @@ module.exports = (musicorum) => {
         type: body.type,
         user: body.user,
         image: {
-          cdn: 'CDN-1',
-          path: upload.uploadedFiles[0].name
+          cdn: 'CDN-2',
+          path: '/' + upload.public_id
         },
         presentation: body.presentation,
         items: playlistItems
