@@ -1,7 +1,5 @@
 const fetch = require('node-fetch')
 const UploadAPI = require('./UploadAPI.js')
-const { Readable } = require('stream')
-const { MiscUtils } = require('../utils')
 
 module.exports = class GeneratorAPI {
   static async uploadCover (user, image) {
@@ -19,6 +17,6 @@ module.exports = class GeneratorAPI {
     }).then(r => r.buffer())
       .catch(e => console.error(e))
 
-    return UploadAPI.image4io(buff, '/p')
+    return UploadAPI.cloudinary(buff, process.env.CLOUDINARY_PLAYLIST_PRESET)
   }
 }
