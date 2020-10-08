@@ -37,6 +37,6 @@ module.exports = Joi.object({
         .max(400)
     }))
     .min(1)
-    .max(50)
+    .max(100)
     .required()
 })
