@@ -20,7 +20,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "form-data": "latest",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "lastfm-node-client": "^2.1.0",
     "login-with-twitter": "^1.2.2",
     "moment": "^2.24.0",
